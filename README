@@ -57,8 +57,7 @@ drwxr-xr-x   - jongwook supergroup          0 2013-04-20 21:30 airline/data
 ~/rtest$ hadoop fs -mkdir airline/data04
 ~/rtest$ hadoop fs -put  2004-1000.csv airline/data04/
 
-8. Run Jeffrey’s R code using Hadoop rmr
-$ export LD_LIBRARY_PATH=/usr/lib/hadoop-0.20-mapreduce/lib/native/Linux-amd64-64/
+8. go to the example R code using Hadoop rmr
 ~/rtest$ cd r-hadoop/rmr
 
 9. Run the R example code and see the result stored at "dept-delay-month-orig/" directory
