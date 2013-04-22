@@ -1,0 +1,11 @@
+.project
+data/
+bin/
+*.class
+*~
+
+
+
+
+
+

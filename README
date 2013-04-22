@@ -1,0 +1,78 @@
+r-hadoop
+========
+
+R-Hadoop example
+Requirements: whirr-0.8.1
+In order to start whirr at AWS, you may take a look at
+a. http://dal-cloudcomputing.blogspot.com/2013/04/run-cloudera-hadoop-cluster-using-whirr.html
+b. http://dal-cloudcomputing.blogspot.com/2011/06/how-to-set-up-hadoop-and-hbase-together.html
+
+R-Hadoop example how to run:
+1. download this r-hadoop and Jeffrey’s “R Hadoop Whirr”  tutorial using git; set the r-hadoop home with $R_HADOOP_HOME.
+$ git clone git://github.com/hipic/r-hadoop.git
+$ git clone git://github.com/jeffreybreen/tutorial-201209-TDWI-big-data.git
+
+2. copy hadoop property files
+$ cp $R_HADOOP_HOME/config/hadoop-ec2.properties $WHIRR_HOME/recipes/
+
+3. run Cloudera Hadoop (CDH) using Whirr with the file "hadoop-ec2.properties" assuming key file is "id_rsa_whirr"
+$ $WHIRR_HOME/bin/whirr launch-cluster --config $WHIRR_HOME/recipes/hadoop-ec2.properties  --private-key-file ~/.ssh/id_rsa_whirr
+
+4. at $R-HADOOP_HOME/config, run the script file using whirr to install R related codes to all nodes at EC2:
+$ $WHIRR_HOME/config/bin/whirr run-script --script install-r-CDH4.sh --config $WHIRR_HOME/config/recipes/hadoop-ec2.properties  --private-key-file ~/.ssh/id_rsa_whirr
+
+If successful, you will see the following and rmr2 is installed at /usr/lib64/R/library/:
+** building package indices
+** testing if installed package can be loaded
+
+* DONE (rmr2)
+Making packages.html  ... done
+
+
+5. At EC2 main node, test R with Hadoop:
+$ mkdir rtest
+$ cd rtest/
+$ git clone git://github.com/hipic/r-hadoop.git
+
+6. Download Airline schedule data:
+~/rtest$ curl http://stat-computing.org/dataexpo/2009/2008.csv.bz2 | bzcat | head -1000 > air-2008.csv
+
+~/rtest$ curl http://stat-computing.org/dataexpo/2009/2004.csv.bz2 | bzcat | head -1000 > 2004-1000.csv
+
+7. Make HDFS directories:
+~/rtest$ hadoop fs -mkdir airline
+~/rtest$ hadoop fs -ls /user
+Found 2 items
+drwxr-xr-x   - hdfs     supergroup          0 2013-04-20 20:32 /user/hive
+drwxr-xr-x   - jongwook supergroup          0 2013-04-20 21:30 /user/jongwook
+~/rtest$ hadoop fs -ls /user/jongwook
+Found 1 items
+drwxr-xr-x   - jongwook supergroup          0 2013-04-20 21:30 /user/jongwook/airline
+~/rtest$ hadoop fs -mkdir airline/data
+~/rtest$ hadoop fs -ls airline
+Found 1 items
+drwxr-xr-x   - jongwook supergroup          0 2013-04-20 21:30 airline/data
+~/rtest$ hadoop fs -mkdir airline/out
+~/rtest$ hadoop fs -put  air-2008.csv airline/data/
+~/rtest$ hadoop fs -mkdir airline/data04
+~/rtest$ hadoop fs -put  2004-1000.csv airline/data04/
+
+8. Run Jeffrey’s R code using Hadoop rmr
+$ export LD_LIBRARY_PATH=/usr/lib/hadoop-0.20-mapreduce/lib/native/Linux-amd64-64/
+~/rtest$ cd r-hadoop/rmr
+
+9. Run the R example code and see the result stored at "dept-delay-month-orig/" directory
+$ ./dept-delay.R
+$ hadoop fs -cat dept-delay-month-orig/part-00001 | tail
+SEQ/org.apache.hadoop.typedbytes.TypedBytesWritable/org.apache.hadoop.typedbytes.TypedBytesWritable�'W5�l
+
+Reference
+1. http://jeffreybreen.wordpress.com/2012/03/10/big-data-step-by-step-slides/
+2. http://www.rstudio.com/ide/download/server
+3. https://github.com/jseidman
+4. http://www.slideshare.net/jseidman/distributed-data-analysis-with-r-strangeloop-2011
+5. http://dal-cloudcomputing.blogspot.com/2013/04/run-cloudera-hadoop-cluster-using-whirr.html
+6. http://dal-cloudcomputing.blogspot.com/2011/06/how-to-set-up-hadoop-and-hbase-together.html
+
+
+
