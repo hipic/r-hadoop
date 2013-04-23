@@ -29,8 +29,8 @@ cd RHadoop
 git checkout origin/dev
 sudo R CMD INSTALL rmr2/pkg
 # Replaced by Jongwook Woo
-sudo R CMD INSTALL rhbase/pkg
-sudo R CMD INSTALL rhdfs/pkg
+# sudo R CMD INSTALL rhbase/pkg
+# sudo R CMD INSTALL rhdfs/pkg
 # wget --no-check-certificate https://github.com/RevolutionAnalytics/RHadoop/tarball/rmr-1.3.1
 # tar zxvf rmr-1.3.1
 # cd RevolutionAnalytics-RHadoop-fff2743
