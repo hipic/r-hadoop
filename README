@@ -19,7 +19,7 @@ $ cp $R_HADOOP_HOME/config/hadoop-ec2.properties $WHIRR_HOME/recipes/
 $ $WHIRR_HOME/bin/whirr launch-cluster --config $WHIRR_HOME/recipes/hadoop-ec2.properties  --private-key-file ~/.ssh/id_rsa_whirr
 
 4. at $R-HADOOP_HOME/config, run the script file using whirr to install R related codes to all nodes at EC2:
-$ $WHIRR_HOME/config/bin/whirr run-script --script install-r-CDH4.sh --config $WHIRR_HOME/config/recipes/hadoop-ec2.properties  --private-key-file ~/.ssh/id_rsa_whirr
+$ $WHIRR_HOME/bin/whirr run-script --script install-r-CDH4.sh --config $WHIRR_HOME/config/recipes/hadoop-ec2.properties  --private-key-file ~/.ssh/id_rsa_whirr
 
 If successful, you will see the following and rmr2 is installed at /usr/lib64/R/library/:
 ** building package indices
