@@ -13,7 +13,8 @@ sudo yum -y install --nogpgcheck rstudio-server-0.97.173-x86_64.rpm
 rm rstudio-server*
 
 sudo R --no-save << EOF
-install.packages( c('Rcpp','RJSONIO', 'digest', 'functional','stringr'), repos="http://cran.revolutionanalytics.com", INSTALL_opts=c('--byte-compile') )
+#install.packages( c('Rcpp','RJSONIO', 'digest', 'functional','stringr'), repos="http://cran.revolutionanalytics.com", INSTALL_opts=c('--byte-compile') )
+install.packages( c('Rcpp','RJSONIO', 'digest', 'functional','stringr', 'itertools', 'plyr'), repos="http://cran.revolutionanalytics.com", INSTALL_opts=c('--byte-compile') )
 EOF
 
 # Download the RHadoop Git Repo for rmr2
