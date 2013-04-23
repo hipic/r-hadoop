@@ -14,8 +14,8 @@ deptdelay = function (input, output) {
             #textinputformat = csvtextinputformat,
             #input.format = "csv", # csvtextinputformat,
             input.format = make.input.format("csv", sep=","),
-            output.format = make.output.format("csv", sep=","),
-            vectorized = TRUE, structured = TRUE
+            output.format = make.output.format("csv", sep=",")
+            vectorized = TRUE, structured = TRUE,
             map = function(k, fields) {
               # Skip header lines and bad records:
               if (!(identical(fields[[1]], "Year")) & length(fields) == 29) {
