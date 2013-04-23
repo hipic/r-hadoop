@@ -12,8 +12,8 @@ deptdelay = function (input, output) {
   mapreduce(input = input,
             output = output,
             #textinputformat = csvtextinputformat,
-            input.format = csvtextinputformat, #"csv", # 
-            #input.format = make.input.format("csv", sep=","),
+            #input.format = csvtextinputformat, #"csv", # 
+            input.format = make.input.format("csv", sep="\\,"),
             #output.format = make.output.format("csv", sep=","),
             #vectorized = TRUE, structured = TRUE,
             map = function(k, fields) {
