@@ -30,3 +30,5 @@ wordcount =
       map = wc.map,
       reduce = wc.reduce,
       combine = T)}
+
+from.dfs(wordcount("airline/data04/2004-1000.csv"))
