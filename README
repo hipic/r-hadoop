@@ -81,7 +81,7 @@ Then, you may see the following:
 SEQ/org.apache.hadoop.typedbytes.TypedBytesWritable/org.apache.hadoop.typedbytes.TypedBytesWritable�'W5�l
 
 11. You may also run the following right after then:
-$ ./worcount.R
+$ ./wordcount.R
 
 Reference
 1. http://jeffreybreen.wordpress.com/2012/03/10/big-data-step-by-step-slides/
