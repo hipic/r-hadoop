@@ -62,8 +62,26 @@ drwxr-xr-x   - jongwook supergroup          0 2013-04-20 21:30 airline/data
 
 9. Run the R example code and see the result stored at "dept-delay-month-orig/" directory
 $ ./dept-delay.R
+
+Then you may see the following:
+
+13/04/24 01:24:10 INFO streaming.StreamJob: Output: dept-delay-month-orig
+$key
+ [1]    1    1    1    1    2    2    2    2 2004 2004 2004 2004
+
+$val
+ [1]    1 2497    1   NA    2    3    2   90 2004  500 2004   NA
+
+
+10. Check out hte content of HDFS file:
 $ hadoop fs -cat dept-delay-month-orig/part-00001 | tail
+
+Then, you may see the following:
+
 SEQ/org.apache.hadoop.typedbytes.TypedBytesWritable/org.apache.hadoop.typedbytes.TypedBytesWritable�'W5�l
+
+11. You may also run the following right after then:
+$ ./worcount.R
 
 Reference
 1. http://jeffreybreen.wordpress.com/2012/03/10/big-data-step-by-step-slides/
